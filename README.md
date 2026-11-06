@@ -1,5 +1,9 @@
 # SearXNG AQUA
 
+![Python](https://emblem.xdan.cc/badge.svg?label=python&message=3.11%2B&look=connected&labelColor=%233D3D3D&color=%23E11235)
+![Platform](https://emblem.xdan.cc/badge.svg?label=platform&message=Linux&look=connected&labelColor=%233D3D3D&color=%23E11235)
+![License](https://emblem.xdan.cc/badge.svg?label=license&message=AGPL-3.0&look=connected&labelColor=%233D3D3D&color=%23E11235)
+
 A privacy-focused SearXNG metasearch front end with the AQUA theme, a custom
 RAMA-derived interface, and a Konsole desktop launcher.
 
