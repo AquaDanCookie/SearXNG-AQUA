@@ -33,7 +33,7 @@ jobs:
           python -m pip install pytest
 
       - name: Smoke test
-        run: python -c "import searx; print('searx import ok')"
+        run: python -m compileall -q searx
 
       - name: Run tests
         run: |
