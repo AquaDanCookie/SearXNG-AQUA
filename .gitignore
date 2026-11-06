@@ -1,0 +1,25 @@
+# Runtime and private data
+/app/venv/
+/app/searx/settings.yml
+*.pacnew
+__pycache__/
+*.py[cod]
+*.sqlite
+*.db
+*.log
+/app/docs/_build/
+
+# Local operations / machine-specific integration
+/backups/
+/LOCAL.md
+/desktop/
+/system/
+/bin/searxng-rama-console
+/tools/migrate-searxng-aqua.sh
+/tools/searxng-rama-ui-fix.installed
+
+# Release artifacts
+/dist/
+*.tar.gz
+*.zip
+.DS_Store

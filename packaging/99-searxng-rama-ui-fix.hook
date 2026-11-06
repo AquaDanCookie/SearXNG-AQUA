@@ -1,0 +1,10 @@
+[Trigger]
+Type = Package
+Operation = Install
+Operation = Upgrade
+Target = searxng-rama
+
+[Action]
+Description = Re-applying local SearXNG AQUA UI fixes to the theme CSS...
+When = PostTransaction
+Exec = /usr/local/bin/searxng-rama-ui-fix

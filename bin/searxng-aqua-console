@@ -1,0 +1,85 @@
+#!/usr/bin/env bash
+# SearXNG AQUA — run the server in this terminal window.
+# The server is tied to the window: closing the window stops it.
+
+set -u
+
+SOURCE="${BASH_SOURCE[0]}"
+while [ -L "$SOURCE" ]; do
+  DIR="$(cd -P "$(dirname "$SOURCE")" >/dev/null 2>&1 && pwd)"
+  SOURCE="$(readlink "$SOURCE")"
+  [[ "$SOURCE" != /* ]] && SOURCE="$DIR/$SOURCE"
+done
+SCRIPT_DIR="$(cd -P "$(dirname "$SOURCE")" >/dev/null 2>&1 && pwd)"
+ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+
+APP="${SEARXNG_AQUA_APP:-$ROOT/app}"
+URL="${SEARXNG_AQUA_URL:-http://localhost:8855/}"
+SETTINGS="${SEARXNG_AQUA_SETTINGS:-$APP/searx/settings.yml}"
+PYTHON="${SEARXNG_AQUA_PYTHON:-$APP/venv/bin/python}"
+
+server_pid=""
+opener_pid=""
+
+cleanup() {
+  local rc=$?
+  if [ -n "$opener_pid" ] && kill -0 "$opener_pid" 2>/dev/null; then
+    kill "$opener_pid" 2>/dev/null
+  fi
+  if [ -n "$server_pid" ] && kill -0 "$server_pid" 2>/dev/null; then
+    kill "$server_pid" 2>/dev/null
+    wait "$server_pid" 2>/dev/null
+  fi
+  exit "$rc"
+}
+trap 'exit 0' HUP INT TERM
+trap cleanup EXIT
+
+# Already running? Then just show it.
+if curl -s -o /dev/null --max-time 2 "$URL"; then
+  echo "SearXNG AQUA is already running — opening $URL"
+  xdg-open "$URL" >/dev/null 2>&1 &
+  sleep 2
+  exit 0
+fi
+
+if [ ! -d "$APP" ] || [ ! -x "$PYTHON" ]; then
+  echo "SearXNG AQUA is not set up yet."
+  echo
+  echo "From $ROOT:"
+  echo "  python3 -m venv app/venv"
+  echo "  app/venv/bin/pip install -r app/requirements.txt"
+  echo "  cp app/searx/settings.example.yml app/searx/settings.yml"
+  echo "  # edit app/searx/settings.yml and set server.secret_key"
+  exit 1
+fi
+
+if [ ! -r "$SETTINGS" ]; then
+  echo "Missing settings: $SETTINGS"
+  echo "Copy app/searx/settings.example.yml to app/searx/settings.yml and set server.secret_key."
+  exit 1
+fi
+
+printf '\033]2;SearXNG AQUA\007' # window title
+echo "SearXNG AQUA — starting. The log below is live."
+echo "Close this window to stop the server."
+echo
+
+cd "$APP" || exit 1
+SEARXNG_SETTINGS_PATH="$SETTINGS" "$PYTHON" -m searx.webapp &
+server_pid=$!
+
+# Open the web UI in the browser once the server answers.
+(
+  for _ in $(seq 1 120); do
+    if curl -s -o /dev/null --max-time 1 "$URL"; then
+      xdg-open "$URL" >/dev/null 2>&1
+      exit 0
+    fi
+    sleep 0.5
+  done
+  echo "Server did not come up within 60s — open $URL manually." >&2
+) &
+opener_pid=$!
+
+wait "$server_pid"

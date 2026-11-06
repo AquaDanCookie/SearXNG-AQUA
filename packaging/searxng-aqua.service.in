@@ -1,0 +1,19 @@
+[Unit]
+Description=SearXNG AQUA
+After=network.target
+
+[Service]
+Type=simple
+User=@USER@
+Group=@USER@
+WorkingDirectory=@APP_DIR@
+Environment="SEARXNG_SETTINGS_PATH=@APP_DIR@/searx/settings.yml"
+ExecStart=@APP_DIR@/venv/bin/python -m searx.webapp
+Restart=on-failure
+RestartSec=5
+PrivateTmp=true
+NoNewPrivileges=true
+ReadWritePaths=@APP_DIR@
+
+[Install]
+WantedBy=multi-user.target

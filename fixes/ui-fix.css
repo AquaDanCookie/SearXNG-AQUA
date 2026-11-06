@@ -1,0 +1,172 @@
+
+/* RAMA-UI-FIX v1 — local fixes for the SearXNG RAMA theme.
+   Re-applied after package install/upgrade by /usr/local/bin/searxng-rama-ui-fix */
+
+/* 1. Image viewer collapsed / flickered on hover.
+   The hover lift on result cards (.result:hover { transform: translateY(-1px) })
+   made the hovered card a containing block for the position:fixed detail panel.
+   The selected tile is exactly where the cursor sits after clicking it, so the
+   panel was re-anchored to the tile and collapsed to a ~100x114 box; moving the
+   mouse off the tile restored it. Keep the image tiles out of the hover lift. */
+.result.result-images:hover{transform:none}
+
+/* 2. Viewer toolbar icons were baseline-aligned SVGs inside 1.5rem circles and
+   hung below them, so close/previous/next looked like empty, clipped rings at
+   40% opacity. Centre the glyph and give the buttons a readable surface. */
+#results.image-detail-open article.result-images[data-vim-selected] .detail a.result-detail-close,
+#results.image-detail-open article.result-images[data-vim-selected] .detail a.result-detail-previous,
+#results.image-detail-open article.result-images[data-vim-selected] .detail a.result-detail-next{
+  width:2rem;height:2rem;padding:0;display:flex;align-items:center;justify-content:center;
+  filter:none;background:var(--surface);border:1px solid var(--line-2);color:var(--muted)}
+#results.image-detail-open article.result-images[data-vim-selected] .detail a.result-detail-close:hover,
+#results.image-detail-open article.result-images[data-vim-selected] .detail a.result-detail-previous:hover,
+#results.image-detail-open article.result-images[data-vim-selected] .detail a.result-detail-next:hover{
+  color:var(--ink);border-color:var(--accent);background:var(--surface-2)}
+#results.image-detail-open article.result-images[data-vim-selected] .detail a.result-detail-close svg,
+#results.image-detail-open article.result-images[data-vim-selected] .detail a.result-detail-previous svg,
+#results.image-detail-open article.result-images[data-vim-selected] .detail a.result-detail-next svg{
+  width:1.05rem;height:1.05rem;display:block;vertical-align:middle}
+
+/* 3. Side-panel viewer (wide windows): let the image use the panel's free
+   height instead of upstream's max-height: calc(100vh - 42rem), which left
+   only a sliver of image on shorter windows. */
+@media screen and (min-width:79.8125em){
+  #results.image-detail-open article.result-images[data-vim-selected] .detail a.result-images-source{
+    display:flex;align-items:center;justify-content:center;min-height:0}
+  #results.image-detail-open article.result-images[data-vim-selected] .detail a.result-images-source img{
+    width:auto;height:auto;max-width:100%;max-height:100%;margin:auto}
+}
+
+/* 4. Preferences switch focus ring sat off the control.
+   Upstream draws it as a ::after box at a fixed -0.6em/-0.55em offset sized for
+   the old 2.5em x 0.7em track, so on the RAMA 2.9em x 1.5em switch the ring
+   hangs off the switch (visible when the toggle is clicked/selected). Drop the
+   pseudo ring and outline the control itself; the outline follows the switch's
+   border radius, so it stays aligned for both mouse and keyboard focus. */
+input.checkbox-onoff[type="checkbox"]:focus::after{content:none}
+input.checkbox-onoff[type="checkbox"]:focus{
+  outline:2px solid var(--accent);outline-offset:3px}
+
+/* 5. With the viewer open on a wide window, keep the results box clear of the
+   panel. Upstream sizes it to min(98%, 59.25rem), but centre alignment can
+   push the box right, so thumbnails wrap underneath the 60rem-anchored panel
+   and vanish behind it. Pin the column to the left of the panel instead. */
+@media screen and (min-width:79.8125em){
+  #main_results div#results.only_template_images.image-detail-open{
+    width:calc(60rem - 3rem)!important;
+    margin-left:1.5rem!important;
+    margin-right:auto!important}
+}
+
+/* 6. Stacked infoboxes (a search can return several, e.g. Wikipedia plus a
+   second entity) were rendered flush against each other: the source chip of
+   one box sat directly on the next title. Separate them with a hairline and
+   contain the floated images used by the narrow layouts. */
+#sidebar #infoboxes .infobox{display:flow-root}
+#sidebar #infoboxes .infobox + .infobox{
+  margin-top:var(--sp-5);padding-top:var(--sp-4);border-top:1px solid var(--line)}
+
+/* 7. Back-to-top was a 40x49 rounded rectangle pinned at left:56.3rem, which
+   put it straight on top of the page-number row near the bottom of a search.
+   Make it a round button and park it in the empty left gutter, clear of the
+   results column and the pagination. */
+#main_results #results #backToTop#backToTop{
+  left:1.5rem!important;right:auto!important;bottom:1.5rem!important;
+  width:2.75rem;height:2.75rem;padding:0;border-radius:50%;
+  background:var(--surface-2);border:1px solid var(--line-2);
+  box-shadow:0 10px 24px #00000059}
+#main_results #results #backToTop#backToTop:hover{background:var(--surface-3)}
+#main_results #results #backToTop#backToTop > a{
+  width:100%;height:100%;margin:0;padding:0;border-radius:50%;
+  display:flex;align-items:center;justify-content:center}
+#main_results #results #backToTop#backToTop svg{
+  width:1.125rem;height:1.125rem;display:block}
+
+/* 8. Category chip icons were rasterised at a fractional 13.99px with their
+   strokes touching the label box, which shaved the bottom of the glyph on some
+   displays. Give them a whole-pixel box and let the SVG paint to its edges. */
+#categories .category svg,
+#categories .category_button svg{
+  width:15px;height:15px;flex:0 0 auto;overflow:visible}
+
+/* 9. Custom colours (Preferences -> User Interface). Styling for the picker
+   block injected by ui-fix.js; the pickers write CSS variables at runtime. */
+#rama-colours .value,
+#rama-colours .description{grid-column:2 / -1}
+#rama-colours .rama-color-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(8rem,1fr));
+  gap:0.8rem 1rem;max-width:44rem}
+#rama-colours .rama-color{
+  display:flex;flex-direction:column;gap:0.35rem}
+#rama-colours .rama-color span{
+  font-family:var(--font-mono);letter-spacing:0.06em;text-transform:uppercase;
+  color:var(--faint);font-size:0.72rem}
+#rama-colours .rama-color input[type="color"]{
+  -webkit-appearance:none;appearance:none;width:100%;height:2.1rem;padding:2px;
+  border:1px solid var(--line-2);border-radius:var(--r-sm);
+  background:var(--surface-2);cursor:pointer}
+#rama-colours .rama-color input[type="color"]::-webkit-color-swatch-wrapper{padding:0}
+#rama-colours .rama-color input[type="color"]::-webkit-color-swatch{border:0;border-radius:5px}
+#rama-colours .rama-color input[type="color"]::-moz-color-swatch{border:0;border-radius:5px}
+#rama-colours .rama-color input[type="color"]:focus{
+  outline:2px solid var(--accent);outline-offset:2px}
+#rama-colours .rama-color-actions{margin-top:0.8rem;display:flex}
+#rama-colours .rama-color-reset{
+  font:inherit;font-family:var(--font-mono);font-size:0.76rem;
+  padding:0.45rem 0.8rem;color:var(--muted);background:var(--surface-2);
+  border:1px solid var(--line-2);border-radius:var(--r-sm);cursor:pointer;
+  transition:color var(--dur) var(--ease),border-color var(--dur) var(--ease)}
+#rama-colours .rama-color-reset:hover{color:var(--ink);border-color:var(--accent)}
+@media screen and (max-width:820px){
+  #rama-colours .value,
+  #rama-colours .description{grid-column:1}
+}
+
+/* 10. Every page number was drawn twice. The theme applies the .page_number
+   box styles to both the <form> wrapper and the <input> inside it, so each
+   number was a bordered, padded box around an already bordered button; on the
+   filled current page that read as a box inside a box. Strip the wrapper and
+   keep the input as the single square. */
+#pagination .numbered_pagination form.page_number{
+  border:0;padding:0;margin:0 0 0 .4rem;border-radius:0;background:none;
+  width:auto;height:auto;min-width:0}
+#pagination .numbered_pagination form.page_number:first-child{margin-left:0}
+/* The single squares are narrower than the old double boxes, which let the
+   numbers slide onto the Previous/Next row. Keep them on their own row. */
+#pagination .numbered_pagination{flex-basis:100%}
+
+/* 11. The previous/next chevrons were bottom-aligned in the 24.8px line box,
+   so they sat visibly lower than the button text. Middle-aligning still left
+   them ~1px below the text's optical centre; lift them onto the same line. */
+#pagination .previous_page svg,
+#pagination .next_page svg{vertical-align:middle;position:relative;top:-1px}
+
+/* 12. The home-page glow was hard-coded red (#ef233c); drive it (and the dot
+   grid) from the chosen accent instead. Fallbacks keep the stock look when no
+   custom colours are set. */
+.home{background-image:
+  radial-gradient(58% 36% at 50% -4%,var(--rama-home-glow,#ef233c1c),transparent 60%),
+  radial-gradient(80% 60% at 50% 120%,var(--rama-home-glow-2,#8d99ae0d),transparent 60%)}
+.home::before{background-image:radial-gradient(var(--line,#ffffff14) 1px,transparent 1px)}
+
+/* 13. The upstream theme removes the home category chips' bottom border with
+   `.index .category label{border-bottom:initial!important}`. That was meant for
+   their underline-style tabs, but on RAMA's filled pills it leaves the bottom
+   edge open — most obvious once a chip is checked and gets an accent fill. Put
+   the hairline back and tint it with the accent while the chip is selected. */
+.home .category label{border-bottom:1px solid var(--line)!important}
+.home .category label:hover{border-bottom-color:var(--line-2)!important}
+.home .category input:checked + label{border-bottom-color:var(--accent)!important}
+
+/* 14. Optional back-to-top placement (Preferences -> User Interface). The
+   default rule above parks it in the left gutter; a saved preference flips it
+   to the matching gutter. The attribute selector outranks the base rule. */
+html[data-rama-back-to-top="right"] #main_results #results #backToTop#backToTop{
+  left:auto!important;right:1.5rem!important}
+
+/* 15. Layout fieldset injected by ui-fix.js. The theme's fieldset already
+   places the legend and the value control; let the help text use the width. */
+#rama-layout .description{grid-column:2 / -1}
+@media screen and (max-width:820px){
+  #rama-layout .description{grid-column:1}
+}

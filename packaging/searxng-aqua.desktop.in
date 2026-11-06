@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=SearXNG AQUA
+GenericName=Private Search Engine
+Comment=Run your local SearXNG AQUA metasearch instance in a terminal
+Exec=konsole --hold -e @LAUNCHER@
+Icon=searxng-aqua
+Terminal=false
+Categories=Network;WebBrowser;
+Keywords=search;searxng;aqua;metasearch;privacy;
+StartupNotify=false
