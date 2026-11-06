@@ -21,7 +21,7 @@ affiliated with or endorsed by either upstream project.
   under Preferences > User Interface.
 - Home glow and favicon that follow the chosen accent.
 - A Konsole launcher with live logs. Closing the window stops the server.
-- Desktop entry, systemd template and pacman-hook helpers for the Arch package.
+- Desktop entry and systemd template.
 
 ## Quick start (from source)
 
@@ -93,10 +93,8 @@ want to use the Konsole launcher.
 
 ### Arch / AUR base (optional)
 
-The repository is a full source tree and does not require the AUR package. The
-`packaging/` directory also contains a pacman hook and UI-fix applier for an
-existing `searxng-rama` AUR installation at `/opt/searxng-rama`. Those files
-keep the upstream package name so they continue to work with the package.
+The repository is a full source tree and does not require the AUR package.
+`packaging/` contains the desktop entry, icon and systemd template.
 
 ## Project layout
 
@@ -104,13 +102,12 @@ keep the upstream package name so they continue to work with the package.
 app/                 SearXNG source tree with the prebuilt theme
 bin/                 Portable Konsole launcher
 fixes/               Reapplied UI-fix CSS and JS source
-packaging/           Desktop, systemd and pacman-hook helpers
+packaging/           Desktop, systemd and icon helpers
 docs/images/         README screenshot
 ```
 
-The UI fix CSS and JS are applied to the shipped theme bundles under
-`app/searx/static/themes/simple/`, so no build step is required. The source is
-in `fixes/`; `tools/apply-fixes` reapplies it to `app/` without root.
+The UI fix CSS and JS are in `fixes/` and already applied to the shipped theme
+bundles under `app/searx/static/themes/simple/`. No build step is required.
 
 ## Updating
 
@@ -119,12 +116,7 @@ git pull
 app/venv/bin/pip install -r app/requirements.txt
 ```
 
-Your `app/searx/settings.yml` is ignored by git and is preserved. Reapply the
-UI fixes if the theme bundles change:
-
-```bash
-./tools/apply-fixes
-```
+Your `app/searx/settings.yml` is ignored by git and is preserved.
 
 ## Version
 

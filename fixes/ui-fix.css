@@ -1,6 +1,5 @@
 
-/* RAMA-UI-FIX v1: local fixes for the SearXNG AQUA theme.
-   Reapplied after package install/upgrade by /usr/local/bin/searxng-rama-ui-fix */
+/* RAMA-UI-FIX v1: local fixes for the SearXNG AQUA theme, applied in the shipped theme bundles. */
 
 /* 1. Image-tile hover lift made the fixed viewer collapse into the tile. */
 .result.result-images:hover{transform:none}

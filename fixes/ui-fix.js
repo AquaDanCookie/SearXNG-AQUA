@@ -1,5 +1,4 @@
-/* RAMA-UI-JS v1: local colour customisation for the SearXNG AQUA theme.
-   Reapplied after package install/upgrade by /usr/local/bin/searxng-rama-ui-fix */
+/* RAMA-UI-JS v1: local colour customisation for the SearXNG AQUA theme, applied in the shipped theme bundles. */
 
 ;(function () {
   'use strict';

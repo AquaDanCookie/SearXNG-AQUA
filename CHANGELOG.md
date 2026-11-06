@@ -9,8 +9,7 @@
   The favicon and home glow follow the chosen accent.
 - Back-to-top placement preference (Left or Right) alongside the working
   back-to-top control.
-- Portable Konsole launcher, desktop installer, systemd template and Arch
-  packaging helpers.
+- Portable Konsole launcher, desktop installer and systemd template.
 - Sanitised `settings.example.yml`; the active settings file is excluded from
   the repository.
 

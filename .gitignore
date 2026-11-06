@@ -17,6 +17,7 @@ __pycache__/
 /bin/searxng-rama-console
 /tools/migrate-searxng-aqua.sh
 /tools/searxng-rama-ui-fix.installed
+/tools/apply-fixes
 
 # Release artifacts
 /dist/
