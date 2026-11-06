@@ -23,3 +23,6 @@ __pycache__/
 *.tar.gz
 *.zip
 .DS_Store
+.opencode/
+target/
+.env
