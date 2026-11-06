@@ -1,15 +1,8 @@
 {%- set body_class = "page_with_header" -%}
 {%- extends "simple/base.html" -%}
 {#
-  AQUA app bar for the app/content pages (preferences, stats, info).
-
-  Upstream renders the legacy pixel `SEARXNG` PNG in this block. design.md
-  requires the shared `searxng/aqua` lockup and ONE app bar (lockup ▸ context ▸
-  actions) across every page, so AQUA owns this markup instead.
-
-  This bar carries no search field: preferences already owns a <form>, and the
-  Workbench family treats the field as a per-page variation knob. The magnifier
-  action returns to the search page.
+  AQUA app bar for preferences, stats and info pages: brand, page actions,
+  no search field.
 #}
 {%- block header -%}
 {%- from 'simple/icons.html' import icon_big -%}

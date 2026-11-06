@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# SearXNG AQUA — run the server in this terminal window.
+# SearXNG AQUA: run the server in this terminal window.
 # The server is tied to the window: closing the window stops it.
 
 set -u
@@ -37,7 +37,7 @@ trap cleanup EXIT
 
 # Already running? Then just show it.
 if curl -s -o /dev/null --max-time 2 "$URL"; then
-  echo "SearXNG AQUA is already running — opening $URL"
+  echo "SearXNG AQUA is already running. Opening $URL"
   xdg-open "$URL" >/dev/null 2>&1 &
   sleep 2
   exit 0
@@ -61,7 +61,7 @@ if [ ! -r "$SETTINGS" ]; then
 fi
 
 printf '\033]2;SearXNG AQUA\007' # window title
-echo "SearXNG AQUA — starting. The log below is live."
+echo "SearXNG AQUA: starting. The log below is live."
 echo "Close this window to stop the server."
 echo
 
@@ -78,7 +78,7 @@ server_pid=$!
     fi
     sleep 0.5
   done
-  echo "Server did not come up within 60s — open $URL manually." >&2
+  echo "Server did not come up within 60s. Open $URL manually." >&2
 ) &
 opener_pid=$!
 

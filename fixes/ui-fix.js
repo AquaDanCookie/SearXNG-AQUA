@@ -1,5 +1,5 @@
-/* RAMA-UI-JS v1 — local colour customisation for the SearXNG RAMA theme.
-   Re-applied after package install/upgrade by /usr/local/bin/searxng-rama-ui-fix */
+/* RAMA-UI-JS v1: local colour customisation for the SearXNG AQUA theme.
+   Reapplied after package install/upgrade by /usr/local/bin/searxng-rama-ui-fix */
 
 ;(function () {
   'use strict';
@@ -187,8 +187,7 @@
     button.setAttribute('data-rama-bound', '1');
     link.addEventListener('click', function (event) {
       event.preventDefault();
-      // The theme scrolls <body> (its overflow-y is auto), not the window, so
-      // the anchor's plain href="#" only changed the hash and looked dead.
+      // The theme scrolls <body>, not the window; href="#" only changed the hash.
       var scroller = document.body;
       try {
         scroller.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
@@ -353,9 +352,7 @@
 
   function applyColours(colours) {
     var values = tokens(colours);
-    // :root:root matches the specificity of the base theme's
-    // :root.theme-auto / :root.theme-dark dark-mode blocks; being appended
-    // last in <head> then lets the chosen colours win.
+    // :root:root matches the theme's dark-mode specificity; appended last, it wins.
     var css = ':root:root{';
     Object.keys(values).forEach(function (name) {
       css += name + ':' + values[name] + ';';
