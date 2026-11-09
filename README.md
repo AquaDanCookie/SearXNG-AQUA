@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="packaging/searxng-aqua.svg" width="112" alt="SearXNG AQUA icon">
+  <img src="packaging/searxng-aqua.svg?v=2" width="112" alt="SearXNG AQUA icon">
 </p>
 
 <h1 align="center">SearXNG AQUA</h1>
@@ -16,7 +16,7 @@
 </p>
 
 <p align="center">
-  <img src="docs/images/home.jpg" alt="SearXNG AQUA home page">
+  <img src="docs/images/home.jpg?v=2" alt="SearXNG AQUA home page">
 </p>
 
 ---
