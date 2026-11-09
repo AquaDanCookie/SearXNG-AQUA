@@ -1,13 +1,25 @@
-# SearXNG AQUA
+<p align="center">
+  <img src="packaging/searxng-aqua.svg" width="112" alt="SearXNG AQUA icon">
+</p>
 
-![Python](https://emblem.xdan.cc/badge.svg?label=python&message=3.11%2B&look=connected&labelColor=%233D3D3D&color=%23E11235&icon=python)
-![Platform](https://emblem.xdan.cc/badge.svg?label=platform&message=Linux&look=connected&labelColor=%233D3D3D&color=%23E11235&icon=linux)
-![License](https://emblem.xdan.cc/badge.svg?label=license&message=AGPL-3.0&look=connected&labelColor=%233D3D3D&color=%23E11235&icon=material-symbols:license)
+<h1 align="center">SearXNG AQUA</h1>
 
-A privacy-focused SearXNG metasearch front end with the AQUA theme, a custom
-RAMA-derived interface, and a Konsole desktop launcher.
+<p align="center">
+  A privacy-focused SearXNG metasearch front end with the AQUA theme, a custom
+  RAMA-derived interface, and a Konsole desktop launcher.
+</p>
 
-![SearXNG AQUA home page](docs/images/home.jpg)
+<p align="center">
+  <img alt="Python" src="https://emblem.xdan.cc/badge.svg?label=python&amp;message=3.11%2B&amp;look=connected&amp;labelColor=%233D3D3D&amp;color=%23E11235&amp;icon=python">
+  <img alt="Platform" src="https://emblem.xdan.cc/badge.svg?label=platform&amp;message=Linux&amp;look=connected&amp;labelColor=%233D3D3D&amp;color=%23E11235&amp;icon=linux">
+  <img alt="License" src="https://emblem.xdan.cc/badge.svg?label=license&amp;message=AGPL-3.0&amp;look=connected&amp;labelColor=%233D3D3D&amp;color=%23E11235&amp;icon=material-symbols:license">
+</p>
+
+<p align="center">
+  <img src="docs/images/home.jpg" alt="SearXNG AQUA home page">
+</p>
+
+---
 
 SearXNG AQUA is a local fork and customisation of
 [SearXNG](https://github.com/searxng/searxng) and the
