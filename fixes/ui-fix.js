@@ -16,7 +16,7 @@
     muted: '--muted'
   };
   var FALLBACK = {
-    accent: '#e11235',
+    accent: '#482182',
     bg: '#1e2030',
     surface: '#282a3b',
     ink: '#eef2f6',

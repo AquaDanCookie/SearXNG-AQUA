@@ -10,9 +10,9 @@
 </p>
 
 <p align="center">
-  <img alt="Python" src="https://emblem.xdan.cc/badge.svg?label=python&amp;message=3.11%2B&amp;look=connected&amp;labelColor=%233D3D3D&amp;color=%23E11235&amp;icon=python">
-  <img alt="Platform" src="https://emblem.xdan.cc/badge.svg?label=platform&amp;message=Linux&amp;look=connected&amp;labelColor=%233D3D3D&amp;color=%23E11235&amp;icon=linux">
-  <img alt="License" src="https://emblem.xdan.cc/badge.svg?label=license&amp;message=AGPL-3.0&amp;look=connected&amp;labelColor=%233D3D3D&amp;color=%23E11235&amp;icon=material-symbols:license">
+  <img alt="Python" src="https://emblem.xdan.cc/badge.svg?label=python&amp;message=3.11%2B&amp;look=connected&amp;labelColor=%233D3D3D&amp;color=%23482182&amp;icon=python">
+  <img alt="Platform" src="https://emblem.xdan.cc/badge.svg?label=platform&amp;message=Linux&amp;look=connected&amp;labelColor=%233D3D3D&amp;color=%23482182&amp;icon=linux">
+  <img alt="License" src="https://emblem.xdan.cc/badge.svg?label=license&amp;message=AGPL-3.0&amp;look=connected&amp;labelColor=%233D3D3D&amp;color=%23482182&amp;icon=material-symbols:license">
 </p>
 
 <p align="center">
@@ -98,6 +98,8 @@ Open Preferences > User Interface.
 
 Theme colours provides five colour pickers and a Reset to theme button. The
 values are stored in browser storage for the `http://localhost:8855/` origin.
+The shipped default accent is the AQUA purple `#482182`; Reset to theme returns
+to it.
 
 Back to top button offers Left side and Right side.
 

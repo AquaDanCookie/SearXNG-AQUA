@@ -109,7 +109,7 @@ input.checkbox-onoff[type="checkbox"]:focus{
 
 /* 12. Drive the home glow and dot grid from the chosen accent, with stock fallbacks. */
 .home{background-image:
-  radial-gradient(58% 36% at 50% -4%,var(--rama-home-glow,#ef233c1c),transparent 60%),
+  radial-gradient(58% 36% at 50% -4%,var(--rama-home-glow,#4821821c),transparent 60%),
   radial-gradient(80% 60% at 50% 120%,var(--rama-home-glow-2,#8d99ae0d),transparent 60%)}
 .home::before{background-image:radial-gradient(var(--line,#ffffff14) 1px,transparent 1px)}
 
